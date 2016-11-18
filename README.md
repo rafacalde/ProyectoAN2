@@ -59,8 +59,7 @@ mu = 2*(1+lambda);
 % El bucle while se utiliza para realizar iteraciones del método
 % de Gauss-Seidel Optimizado
 l = 1;
-while l <= N 
-    
+while l <= N     
     % Aquí se actualiza el elemento 1 de la última columna de w
     z = (-(h^2)*f(x(1),y(m-1))+g(a,y(m-1))+lambda*g(x(1),d)+lambda*w(1,m-2)+w(2,m-1))/mu;
     NORM = norm(z-w(1,m-1),inf);
@@ -82,13 +81,11 @@ while l <= N
         NORM = norm(w(n-1,m-1)-z,inf);
     end
     w(n-1,m-1) = z;
-    
     % El siguiente for actualiza los valores de w, desde el segundo 
     % al penúltimo, de la todas las fila.
     for j = 2:m-2
-        
         % Aquí actualizan los valores de w, desde el segundo al penúltimo, 
-        % de la primera fila.
+        % de la primera fila
         z = (-(h^2)*f(x(1),y(j))+g(a,y(j))+lambda*w(1,j+1)+lambda*w(1,j-1)+w(2,j))/mu;
         if norm(w(1,j)-z,inf) > NORM
             NORM = norm(w(1,j)-z,inf);
@@ -96,7 +93,7 @@ while l <= N
         w(1,j) = z;
         
         % Este for actualiza los valores de w, desde el segundo al penúltimo, 
-        % de las filas 2 a la n-2.
+        % de las filas 2 a la n-2
         for i = 2:n-2
             z = (-(h^2)*f(x(i),y(j))+w(i-1,j)+lambda*w(i,j+1)+w(i+1,j)+lambda*w(i,j-1))/mu;
             if norm(w(i,j)-z,inf) > NORM
@@ -104,7 +101,6 @@ while l <= N
             end
             w(i,j) =z;
         end
-        
         % Aquí se actualizan los valores de w, desde el segundo al penúltimo,
         % de la última fila
         z = (-(h^2)*f(x(n-1),y(j))+g(b,y(j))+w(n-2,j)+lambda*w(n-1,j+1)+lambda*w(n-1,j-1))/mu;
@@ -150,7 +146,7 @@ end
 % Este último if envía un mensaje de error si se ha revasado el número
 % de iteraciones deseado.
 if l > N
-error('El numero maximo de iteraciones fue excedido') 
+    error('El numero maximo de iteraciones fue excedido') 
 end
 I=zeros(m-1,1);
 J=zeros(m-1,1);
